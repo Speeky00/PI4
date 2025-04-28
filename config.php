@@ -25,6 +25,7 @@
                                 <span>Menu</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="adm.php"><i class="fas fa-microchip mr-2"></i>Sensores</a>
                                 <a class="dropdown-item" href="perfil.php"><i class="fas fa-user mr-2"></i>Perfil</a>
                                 <a class="dropdown-item" href="config.php"><i class="fas fa-cog mr-2"></i>Configurações</a>
                                 <div class="dropdown-divider"></div>

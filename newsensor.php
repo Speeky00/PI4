@@ -25,6 +25,7 @@
                                 <span>Menu</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="adm.php"><i class="fas fa-microchip mr-2"></i>Sensores</a>
                                 <a class="dropdown-item" href="perfil.php"><i class="fas fa-user mr-2"></i>Perfil</a>
                                 <a class="dropdown-item" href="config.php"><i class="fas fa-cog mr-2"></i>Configurações</a>
                                 <div class="dropdown-divider"></div>
@@ -85,6 +86,49 @@
             </div>
         </main>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script>
+  // Sua configuração do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAGHrCKcMcOZlGcArEyCmOW4lFCnvnoNZE",
+    authDomain: "testepi-e8900.firebaseapp.com",
+    databaseURL: "https://testepi-e8900-default-rtdb.firebaseio.com",
+    projectId: "testepi-e8900",
+    storageBucket: "testepi-e8900.firebasestorage.app",
+    messagingSenderId: "194879621285",
+    appId: "1:194879621285:web:f4c7b841a57bb8a6cce54c"
+  };
+
+  // Inicializa o Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // Função para cadastrar sensor
+  document.getElementById('formNovoSensor').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Coleta os dados do formulário
+    const sensorData = {
+      nome: document.getElementById('nomeSensor').value,
+      localizacao: document.getElementById('localizacao').value,
+      intervaloLeitura: document.getElementById('intervaloLeitura').value,
+      limiteAlerta: document.getElementById('limiteAlerta').value,
+      dataCadastro: new Date().toISOString() // Adicionei timestamp para registro
+    };
+
+    // Envia para o Firebase
+    database.ref('sensores').push(sensorData)
+      .then(() => {
+        alert('Sensor cadastrado com sucesso!');
+        window.location.href = 'adm.php';
+      })
+      .catch((error) => {
+        console.error('Erro ao cadastrar:', error);
+        alert('Erro ao cadastrar sensor: ' + error.message);
+      });
+  });
+</script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
